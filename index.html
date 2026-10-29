@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Aplicación Personal</title>
+  
+  <!-- Carga de la librería oficial de Google Sign-In -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <style>
+    /* Estilos para la pantalla de Login */
+    #login-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    #login-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    #error-message {
+      color: #d9534f;
+      margin-top: 1rem;
+      display: none;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PANTALLA DE BLOQUEO POR LOGIN -->
+  <div id="login-overlay">
+    <div id="login-box">
+      <h2>Iniciar Sesión</h2>
+      <p style="color: #666; margin-bottom: 1.5rem;">Acceso restringido para uso personal</p>
+      
+      <!-- Botón de Google inicializado con tu Client ID -->
+      <div id="g_id_onload"
+           data-client_id="411382560644-hcrdoss0ihclipn80iqk9i3p1hccprcm.apps.googleusercontent.com"
+           data-callback="handleCredentialResponse">
+      </div>
+      
+      <div class="g_id_signin" 
+           data-type="standard" 
+           data-size="large" 
+           data-theme="outline">
+      </div>
+
+      <div id="error-message"></div>
+    </div>
+  </div>
+
+  <!-- CONTENIDO DE TU APLICACIÓN (OCULTO POR DEFECTO) -->
+  <div id="app-content" style="display: none;">
+    <!-- ACÁ VA EL CÓDIGO HTML EXISTENTE DE TU APLICACIÓN -->
+    <h1>Mi Proyecto</h1>
+    <p>¡Bienvenido! Ya podés modificar tus cosas y continuar.</p>
+  </div>
+
+  <script>
+    // ⚠️ REEMPLAZÁ ESTE MAIL CON TU CORREO DE GMAIL REAL
+    const MI_EMAIL_AUTORIZADO = "tu-correo@gmail.com";
+
+    // Decodifica el token JWT que devuelve Google
+    function parseJwt(token) {
+      try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // Callback al iniciar sesión con Google
+    function handleCredentialResponse(response) {
+      const userData = parseJwt(response.credential);
+
+      if (userData && userData.email === MI_EMAIL_AUTORIZADO) {
+        // Mail correcto: ocultar login y mostrar la app
+        document.getElementById("login-overlay").style.display = "none";
+        document.getElementById("app-content").style.display = "block";
+      } else {
+        // Mail no autorizado
+        const errorDiv = document.getElementById("error-message");
+        errorDiv.innerText = `Acceso denegado. La cuenta (${userData ? userData.email : 'desconocida'}) no está autorizada.`;
+        errorDiv.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
