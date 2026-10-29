@@ -1,0 +1,22 @@
+MAPA DE OBJETIVOS · ABRIL 2027
+
+HTML INDEPENDIENTE
+Abrí Objetivos-independiente.html con doble clic. Funciona sin internet.
+El guardado local depende del navegador y de mantener el archivo en la misma ubicación.
+Usá Exportar respaldo para conservar tus avances y llevarlos a otro dispositivo.
+
+APLICACIÓN INSTALABLE (PWA)
+Abrí la dirección HTTPS publicada en Chrome o Edge. Usá Instalar aplicación o la opción de instalación del navegador. En iPhone/iPad, usá Safari > Compartir > Agregar a inicio.
+Abrí la aplicación al menos una vez con conexión y esperá a que cargue para habilitar el uso sin conexión. La instalación depende del navegador.
+
+PARA ALOJAR TU COPIA
+Subí todos los archivos de dist a un alojamiento HTTPS, conservando sus nombres y rutas.
+Abrir index.html con doble clic permite usar el mapa, pero no instalar la PWA.
+
+DATOS
+Los datos se guardan en este navegador y dispositivo. No hay sincronización entre equipos.
+Exportar genera un JSON con objetivos, progreso e importes. Importar reemplaza los datos actuales previa confirmación y valida el archivo antes de aplicarlo.
+Los presupuestos iniciales incluyen ingresos de $8.500.000 y gastos de $5.375.000; neto +$3.125.000 ARS. El balance no depende de marcar las tareas y cada movimiento se cuenta una vez. Los detalles son descriptivos; para cambiar un presupuesto usá Editar y actualizá su importe y desglose.
+Las categorías y grupos muestran el progreso de sus tareas finales. Las dos PC son tareas individuales y sus componentes no cuentan como tareas.
+
+Contenido reconstruido del mapa provisto por el usuario. Estilo elegante nuevo: la conversación recuperada no incluía el diseño visual original.
